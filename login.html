@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access Verification</title>
+</head>
+<body>
+    <h2>Enter Access Code</h2>
+    <form id="loginForm">
+        <input type="text" id="accessCode" maxlength="28" required>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        document.getElementById('loginForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const code = document.getElementById('accessCode').value;
+            const response = await fetch(`/validate?code=${code}`);
+            if (response.status === 403) {
+                alert("Access Denied");
+            } else {
+                window.location = "/";
+            }
+        };
+    </script>
+</body>
+</html>
